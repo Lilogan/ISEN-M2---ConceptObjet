@@ -1,6 +1,6 @@
-//import MapClass.*;
-//import BeingsClass.*;
+package Utils;
 
+import MapClass.Map;
 
 
 /**
@@ -18,6 +18,8 @@ public class Main {
     public static final String ANSI_WHITE = "\u001B[37m";
     public static void main(String[] args) {
         System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
+        Map m = new Map(15, 7, 3);
+        m.display();
     }
     
 
