@@ -10,4 +10,10 @@ public class Gobelins extends BadGuys {
         // TODO
 
     }
+
+    @Override
+    public void move() {
+        // TODO Auto-generated method stub
+        
+    }
 }

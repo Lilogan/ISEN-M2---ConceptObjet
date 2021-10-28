@@ -1,8 +1,18 @@
 package MapClass;
 
 import java.util.ArrayList;
-import BeingsClass.Beings;
+import java.util.Random;
 
+import BeingsClass.Beings;
+import BeingsClass.Elfs;
+import BeingsClass.Gobelins;
+import BeingsClass.Humans;
+import BeingsClass.MasterElf;
+import BeingsClass.MasterGobelin;
+import BeingsClass.MasterHuman;
+import BeingsClass.MasterOrc;
+import BeingsClass.Orcs;
+import Utils.Main;
 /**
  * Map
  */
@@ -11,17 +21,69 @@ public class Map {
     private int m;
     private int n;
     private int sizeSafeZone;
-    private ArrayList<Case> allCase;
-
+    private ArrayList<Case> allCase = new ArrayList<>();
 
     public Map(int m, int n, int sizeSafeZone){
         this.m=m;
         this.n=n;
         this.sizeSafeZone=sizeSafeZone;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < m; j++){
+                if(i < sizeSafeZone && j < sizeSafeZone){
+                    allCase.add(new SafeZoneCase(i, j));
+                } else if(i < sizeSafeZone && j >= m-sizeSafeZone){
+                    allCase.add(new SafeZoneCase(i, j));
+                } else if(i >= n - sizeSafeZone && j < sizeSafeZone){
+                    allCase.add(new SafeZoneCase(i, j));
+                } else if(i >= n-sizeSafeZone && j >= m-sizeSafeZone){
+                    allCase.add(new SafeZoneCase(i, j));
+                }else{
+                    Case c = new Case(i,j);
+                    if(Math.random() < 0.1){
+                        c.becomeObstacle();
+                    }
+                    allCase.add(c);
+                }
+            }
+        }
     }
     
     public void display(){
+        Case[][] sortedCases = new Case[n][m];
+        for (Case c: allCase){
+            sortedCases[c.getX()][c.getY()] = c;
+        }
 
+        for (Case[] row: sortedCases){
+            for(Case c: row){
+                //print safe zones
+                if(c.checkFilledWith() != null){
+                    Beings b = c.checkFilledWith();
+                    String color = Main.ANSI_RESET;
+                    if(b instanceof Elfs){
+                        color = Main.ANSI_BLUE;
+                    } else if (b instanceof Orcs){
+                        color = Main.ANSI_RED;
+                    } else if (b instanceof Humans){
+                        color = Main.ANSI_GREEN;
+                    } else if (b instanceof Gobelins){
+                        color = Main.ANSI_YELLOW;
+                    }
+                    if(b instanceof MasterElf || b instanceof MasterOrc || b instanceof MasterHuman || b instanceof MasterGobelin){
+                        System.out.print(color + "M" + Main.ANSI_RESET);
+                    }else{
+                        System.out.print(color + "+" + Main.ANSI_RESET);
+                    }
+                } else if(c instanceof SafeZoneCase){
+                    System.out.print("*");
+                } else if (c.checkIsObstacle()){
+                    System.out.print("x");
+                }else {
+                    System.out.print("-");
+                }
+            }
+            System.out.println("");
+        }
     }
 
     public ArrayList<Case> allCasePossible(int x, int y){
