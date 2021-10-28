@@ -1,7 +1,5 @@
-//import MapClass.*;
-//import BeingsClass.*;
-
-
+import MapClass.*;
+import BeingsClass.*;
 
 /**
  * Main
@@ -19,7 +17,5 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(ANSI_RED + "This text is red!" + ANSI_RESET);
     }
-    
 
-    
 }
