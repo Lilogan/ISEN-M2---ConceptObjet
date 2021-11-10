@@ -18,7 +18,7 @@ public abstract class Beings {
         final private static Random random = new Random(12345);
         final private static int minWord = 1;
         final private static int maxWord = 4;
-
+        final private static int startingEnergy =10;
         private int energy;
         private Case currentCase;
         private ArrayList<String> messages;
@@ -71,6 +71,60 @@ public abstract class Beings {
                 return random.nextBoolean();
         }
 
-        public abstract void move();
+        public void move(int theEnergy,case theCurrentCase){
+                Float percentEnergy = theEnergy/startingEnergy;
+                if (percentEnergy == 0){becomeObstacle()}
+                else if (percentEnergy >=0.40){
+                        int Dir=random.nextInt(3);
+                        int nbrCase=random.nextInt(theEnergy);
+                        for (int i,1,nbrcase){
+                                Case destination = theCurrentCase;
+                                if (Dir ==0){//nord 
+                                        destination.x=theCurrentCase.x;
+                                        destination.y=theCurrentCase.y+1;
+                                        if (destination.isObstacle==true){
+
+                                        }
+                                        else {
+                                              theCurrentCase.x=destination.x
+                                              theCurrentCase.y=destination.y  
+                                         }
+                                }
+                                if (Dir ==1){//est
+                                        destination.x=theCurrentCase.x+1;
+                                        destination.y=theCurrentCase.y;
+                                        if (destination.isObstacle==true){
+
+                                        }
+                                        else {
+                                              theCurrentCase.x=destination.x
+                                              theCurrentCase.y=destination.y  
+                                         }
+                                }
+                                if (Dir ==2){//sud
+                                        destination.x=theCurrentCase.x;
+                                        destination.y=theCurrentCase.y-1;
+                                        if (destination.isObstacle==true){
+
+                                        }
+                                        else {
+                                              theCurrentCase.x=destination.x
+                                              theCurrentCase.y=destination.y  
+                                         }
+                                }
+                                if (Dir ==3){//ouest
+                                        destination.x=theCurrentCase.x+1;
+                                        destination.y=theCurrentCase.y;
+                                        if (destination.isObstacle==true){
+
+                                        }
+                                        else {
+                                              theCurrentCase.x=destination.x
+                                              theCurrentCase.y=destination.y  
+                                         }
+                                }
+
+                }
+        }
 
 }
