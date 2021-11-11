@@ -5,10 +5,4 @@ public class Orcs extends BadGuys{
         this.addMessages(o.getAllMessage());
         o.addMessages(this.getAllMessage());
     }
-
-    public void move() {
-        // TODO
-
-    }
-
 }

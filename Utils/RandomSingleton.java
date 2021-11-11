@@ -11,7 +11,7 @@ public class RandomSingleton {
         this.rnd = new Random(this.seed);
     }
 
-    public static RandomSingleton getInstance() {
+    public final static RandomSingleton getInstance() {
         if(instance == null) {
             instance = new RandomSingleton();
         }

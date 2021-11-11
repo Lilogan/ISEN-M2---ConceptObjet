@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 import BeingsClass.Beings;
 import BeingsClass.Elfs;
-import BeingsClass.Gobelins;
+import BeingsClass.Goblins;
 import BeingsClass.Humans;
 import BeingsClass.MasterElf;
-import BeingsClass.MasterGobelin;
+import BeingsClass.MasterGoblin;
 import BeingsClass.MasterHuman;
 import BeingsClass.MasterOrc;
 import BeingsClass.Orcs;
@@ -64,10 +64,10 @@ public class Map {
                         color = Main.ANSI_RED;
                     } else if (b instanceof Humans){
                         color = Main.ANSI_GREEN;
-                    } else if (b instanceof Gobelins){
+                    } else if (b instanceof Goblins){
                         color = Main.ANSI_YELLOW;
                     }
-                    if(b instanceof MasterElf || b instanceof MasterOrc || b instanceof MasterHuman || b instanceof MasterGobelin){
+                    if(b instanceof MasterElf || b instanceof MasterOrc || b instanceof MasterHuman || b instanceof MasterGoblin){
                         System.out.print(color + "M" + Main.ANSI_RESET);
                     }else{
                         System.out.print(color + "+" + Main.ANSI_RESET);

@@ -8,11 +8,7 @@ import java.util.List;
 import MapClass.Case;
 import Utils.RandomSingleton;
 
-/**
- * EtreVivant
- */
-
-public abstract class Beings {
+public class Beings {
 
         final private static int minWord = 1;
         final private static int maxWord = 4;
