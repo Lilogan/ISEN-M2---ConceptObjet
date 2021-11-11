@@ -5,15 +5,4 @@ public class Humans extends GoodGuys{
         this.addMessages(h.getAllMessage());
         h.addMessages(this.getAllMessage());
     }
-
-    public void move() {
-        // TODO
-
-    }
-
-    @Override
-    public void move() {
-        // TODO Auto-generated method stub
-        
-    }
 }

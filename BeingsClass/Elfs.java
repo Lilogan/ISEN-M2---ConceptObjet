@@ -5,15 +5,4 @@ public class Elfs extends GoodGuys {
         this.addMessages(e.getAllMessage());
         e.addMessages(this.getAllMessage());
     }
-
-    public void move() {
-        // TODO
-
-    }
-
-    @Override
-    public void move() {
-        // TODO Auto-generated method stub
-        
-    }
 }

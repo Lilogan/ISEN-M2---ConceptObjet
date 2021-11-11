@@ -1,7 +1,6 @@
 package MapClass;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 import BeingsClass.Beings;
 import BeingsClass.Elfs;
@@ -13,20 +12,20 @@ import BeingsClass.MasterHuman;
 import BeingsClass.MasterOrc;
 import BeingsClass.Orcs;
 import Utils.Main;
+import Utils.RandomSingleton;
 /**
  * Map
  */
 public class Map {
 
+    private final RandomSingleton random = RandomSingleton.getInstance();
     private int m;
     private int n;
-    private int sizeSafeZone;
     private ArrayList<Case> allCase = new ArrayList<>();
 
     public Map(int m, int n, int sizeSafeZone){
         this.m=m;
         this.n=n;
-        this.sizeSafeZone=sizeSafeZone;
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
                 if(i < sizeSafeZone && j < sizeSafeZone){
@@ -39,7 +38,7 @@ public class Map {
                     allCase.add(new SafeZoneCase(i, j, this));
                 }else{
                     Case c = new Case(i,j, this);
-                    if(Math.random() < 0.1){
+                    if(this.random.nextInt(10) == 1){
                         c.becomeObstacle();
                     }
                     allCase.add(c);
@@ -47,7 +46,7 @@ public class Map {
             }
         }
     }
-    
+
     public void display(){
         Case[][] sortedCases = new Case[n][m];
         for (Case c: allCase){
@@ -117,16 +116,16 @@ public class Map {
                     continue;
                 }
                 possibleCases.add(sortedCases[x+x2][y+y2]);
-            }   
+            }
         }
 
         return possibleCases;
     }
 
-    
+
     public ArrayList<Case> findPathSafeZone(Beings b){
         return new ArrayList<>();
     }
-    
+
 
 }

@@ -2,12 +2,11 @@ package BeingsClass;
 
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 import MapClass.Case;
+import Utils.RandomSingleton;
 
 /**
  * EtreVivant
@@ -15,14 +14,13 @@ import MapClass.Case;
 
 public abstract class Beings {
 
-        final private static Random random = new Random(12345);
+        final private static RandomSingleton random = RandomSingleton.getInstance();
         final private static int minWord = 1;
         final private static int maxWord = 4;
         final private static int startingEnergy =10;
         private int energy;
         private Case currentCase;
         private ArrayList<String> messages;
-        private int lastMove;
 
         public ArrayList<String> getAllMessage() {
                 return this.messages;
@@ -43,7 +41,7 @@ public abstract class Beings {
         public void meeting(Beings b){
                 Boolean win = this.fight(b);
                 List<String> diffMessages = new ArrayList<>();
-                int nbWord = Beings.random.nextInt(Beings.maxWord - Beings.minWord) + 1 + Beings.minWord;
+                int nbWord = Beings.random.nextInt(Beings.minWord, Beings.maxWord);
 
                 if (win) {
                         diffMessages.addAll(b.messages);
@@ -53,7 +51,7 @@ public abstract class Beings {
                         diffMessages.removeAll(b.messages);
                 }
 
-                Collections.shuffle(diffMessages, Beings.random);
+                Collections.shuffle(diffMessages, Beings.random.getRandom());
                 nbWord = nbWord > diffMessages.size() ? diffMessages.size() : nbWord;
                 diffMessages = diffMessages.subList(0,nbWord);
 
@@ -79,7 +77,7 @@ public abstract class Beings {
                         int nbrCase=random.nextInt((int)0.4*startingEnergy);
                         for (int i=0;i<nbrCase; i++){
                                 ArrayList<Case> cases = currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
-                                Case c = cases.get(random.nextInt(cases.size()-1)); 
+                                Case c = cases.get(random.nextInt(cases.size()-1));
                                 if(c.checkIsObstacle()){
                                         break;
                                 }
