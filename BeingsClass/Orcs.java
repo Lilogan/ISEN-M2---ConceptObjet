@@ -7,8 +7,13 @@ public class Orcs extends BadGuys{
 
     final private static HashSet<String> initalWords = new HashSet<>(Arrays.asList("h1","h2","h3"));
 
+    public void meeting(MasterOrc o){
+        o.addMessages(this.getAllMessage());
+    }
+
     public void meeting(Orcs o){
         this.addMessages(o.getAllMessage());
         o.addMessages(this.getAllMessage());
     }
+
 }

@@ -7,8 +7,14 @@ public class Humans extends GoodGuys{
 
     final private static HashSet<String> initalWords = new HashSet<>(Arrays.asList("h1","h2","h3"));
 
+    public void meeting(MasterHuman h){
+        h.addMessages(this.getAllMessage());
+    }
+
     public void meeting(Humans h){
         this.addMessages(h.getAllMessage());
         h.addMessages(this.getAllMessage());
     }
 }
+
+
