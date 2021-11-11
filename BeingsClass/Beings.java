@@ -98,5 +98,54 @@ public abstract class Beings {
                         }
                 }
         }
+        public void returnToMaster(){
+                case posMaster= new(case); //faut voir comment avoir la case ou se trouve master
+                while (((currentCase.getX+1==posMaster.getX)&&(currentCase.getY==posMaster.getY))||((currentCase.getX-1==posMaster.getX)&&(currentCase.getY==posMaster.getY))||((currentCase.getX==posMaster.getX)&&(currentCase.getY+1==posMaster.getY))||((currentCase.getX==posMaster.getX)&&(currentCase.getY-1==posMaster.getY))){
+                          if (currentCase.getX<posMaster.getX){
+                                  if(c.checkIsObstacle()){
+                                        break;
+                                }
+                                //add condition to start fight if there is someone on c
+                                else {
+                                        // comment on remplace?
+                                        currentCase = ;
+                                }
+
+                          }
+                          if (currentCase.getX>posMaster.getX){
+                                  if(c.checkIsObstacle()){
+                                        break;
+                                }
+                                //add condition to start fight if there is someone on c
+                                else {
+                                        // comment on remplace?
+                                        currentCase = ;
+                                }
+
+                          }
+                          if (currentCase.getY<posMaster.getY){
+                                  if(c.checkIsObstacle()){
+                                        break;
+                                }
+                                //add condition to start fight if there is someone on c
+                                else {
+                                        // comment on remplace?
+                                        currentCase = ;
+                                }
+
+                          }
+                          if (currentCase.getY>posMaster.getY){
+                                  if(c.checkIsObstacle()){
+                                        break;
+                                }
+                                //add condition to start fight if there is someone on c
+                                else {
+                                        // comment on remplace?
+                                        currentCase = ;
+                                }
+
+                          }
+                }
+        }
 
 }
