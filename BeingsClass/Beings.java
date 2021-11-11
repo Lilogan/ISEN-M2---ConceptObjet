@@ -71,59 +71,23 @@ public abstract class Beings {
                 return random.nextBoolean();
         }
 
-        public void move(int theEnergy,case theCurrentCase){
-                Float percentEnergy = theEnergy/startingEnergy;
-                if (percentEnergy == 0){becomeObstacle()}
-                else if (percentEnergy >=0.40){
-                        int Dir=random.nextInt(3);
-                        int nbrCase=random.nextInt(theEnergy);
-                        for (int i,1,nbrcase){
-                                Case destination = theCurrentCase;
-                                if (Dir ==0){//nord 
-                                        destination.x=theCurrentCase.x;
-                                        destination.y=theCurrentCase.y+1;
-                                        if (destination.isObstacle==true){
-
-                                        }
-                                        else {
-                                              theCurrentCase.x=destination.x
-                                              theCurrentCase.y=destination.y  
-                                         }
+        public void move(){
+                Float percentEnergy = (float)(energy/startingEnergy);
+                if (percentEnergy == 0){
+                        currentCase.becomeObstacle();
+                } else if ( percentEnergy >= 0.4 ) {
+                        int nbrCase=random.nextInt((int)0.4*startingEnergy);
+                        for (int i=0;i<nbrCase; i++){
+                                ArrayList<Case> cases = currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
+                                Case c = cases.get(random.nextInt(cases.size()-1)); 
+                                if(c.checkIsObstacle()){
+                                        break;
                                 }
-                                if (Dir ==1){//est
-                                        destination.x=theCurrentCase.x+1;
-                                        destination.y=theCurrentCase.y;
-                                        if (destination.isObstacle==true){
-
-                                        }
-                                        else {
-                                              theCurrentCase.x=destination.x
-                                              theCurrentCase.y=destination.y  
-                                         }
+                                //add condition to start fight if there is someone on c
+                                else {
+                                        currentCase = c;
                                 }
-                                if (Dir ==2){//sud
-                                        destination.x=theCurrentCase.x;
-                                        destination.y=theCurrentCase.y-1;
-                                        if (destination.isObstacle==true){
-
-                                        }
-                                        else {
-                                              theCurrentCase.x=destination.x
-                                              theCurrentCase.y=destination.y  
-                                         }
-                                }
-                                if (Dir ==3){//ouest
-                                        destination.x=theCurrentCase.x+1;
-                                        destination.y=theCurrentCase.y;
-                                        if (destination.isObstacle==true){
-
-                                        }
-                                        else {
-                                              theCurrentCase.x=destination.x
-                                              theCurrentCase.y=destination.y  
-                                         }
-                                }
-
+                        }
                 }
         }
 

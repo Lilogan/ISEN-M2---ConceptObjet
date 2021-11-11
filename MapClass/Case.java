@@ -7,16 +7,22 @@ public class Case {
     private int y;
     private Boolean isObstacle;
     private Beings filledWith;
+    private Map map;
 
-    public Case(int x, int y){
+    public Case(int x, int y, Map m){
         this.x = x;
         this.y = y;
+        this.map = m;
         isObstacle = false;
         filledWith = null;
     }
 
     public void becomeObstacle(Beings b){
 
+    }
+
+    public Map getMap(){
+        return map;
     }
 
     public void becomeObstacle(){
@@ -30,6 +36,7 @@ public class Case {
     public int getY(){
         return y;
     }
+    
 
     public boolean checkIsObstacle(){
         return isObstacle;

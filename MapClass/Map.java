@@ -30,15 +30,15 @@ public class Map {
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
                 if(i < sizeSafeZone && j < sizeSafeZone){
-                    allCase.add(new SafeZoneCase(i, j));
+                    allCase.add(new SafeZoneCase(i, j, this));
                 } else if(i < sizeSafeZone && j >= m-sizeSafeZone){
-                    allCase.add(new SafeZoneCase(i, j));
+                    allCase.add(new SafeZoneCase(i, j, this));
                 } else if(i >= n - sizeSafeZone && j < sizeSafeZone){
-                    allCase.add(new SafeZoneCase(i, j));
+                    allCase.add(new SafeZoneCase(i, j, this));
                 } else if(i >= n-sizeSafeZone && j >= m-sizeSafeZone){
-                    allCase.add(new SafeZoneCase(i, j));
+                    allCase.add(new SafeZoneCase(i, j, this));
                 }else{
-                    Case c = new Case(i,j);
+                    Case c = new Case(i,j, this);
                     if(Math.random() < 0.1){
                         c.becomeObstacle();
                     }
@@ -87,7 +87,40 @@ public class Map {
     }
 
     public ArrayList<Case> allCasePossible(int x, int y){
-        return new ArrayList<>();
+        Case[][] sortedCases = new Case[n][m];
+        for (Case c: allCase){
+            sortedCases[c.getX()][c.getY()] = c;
+        }
+
+        ArrayList<Case> possibleCases = new ArrayList<>();
+
+        int minX = -1;
+        int maxX = 1;
+        int minY = -1;
+        int maxY = 1;
+        if(x == 0){
+            minX = 0;
+        }
+        if(x == n-1){
+            maxX=0;
+        }
+        if(y == 0){
+            minY=0;
+        }
+        if(y==m-1){
+            maxY=0;
+        }
+
+        for(int x2=minX; x2 <= maxX; x2++){
+            for(int y2=minY; y2 <= maxY; y2++){
+                if(x2 == 0 && y2 == 0){
+                    continue;
+                }
+                possibleCases.add(sortedCases[x+x2][y+y2]);
+            }   
+        }
+
+        return possibleCases;
     }
 
     
