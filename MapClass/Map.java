@@ -18,7 +18,6 @@ import Utils.RandomSingleton;
  */
 public class Map {
 
-    private final RandomSingleton random = RandomSingleton.getInstance();
     private int m;
     private int n;
     private ArrayList<Case> allCase = new ArrayList<>();
@@ -38,7 +37,7 @@ public class Map {
                     allCase.add(new SafeZoneCase(i, j, this));
                 }else{
                     Case c = new Case(i,j, this);
-                    if(this.random.nextInt(10) == 1){
+                    if(RandomSingleton.getInstance().nextInt(10) == 1){
                         c.becomeObstacle();
                     }
                     allCase.add(c);
