@@ -3,16 +3,18 @@ package BeingsClass;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import MapClass.Case;
 import Utils.RandomSingleton;
 
-public class Beings {
+public abstract class Beings {
 
         final private static int minWord = 1;
         final private static int maxWord = 4;
-        final private static int startingEnergy =10;
+        final private static int startingEnergy = 10;
         private int energy;
         private Case currentCase;
         private ArrayList<String> messages;
@@ -30,7 +32,11 @@ public class Beings {
         }
 
         public void addMessages(ArrayList<String> messages){
-                this.messages.addAll(messages);
+                Set<String> set = new HashSet<>(this.messages);
+                set.addAll(messages);
+
+                this.messages.clear();
+                this.messages.addAll(set);
         }
 
         public void meeting(Beings b){

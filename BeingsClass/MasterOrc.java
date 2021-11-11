@@ -1,6 +1,6 @@
 package BeingsClass;
 
-public class MasterOrc extends Orcs{
+public class MasterOrc extends Orcs implements Master<Orcs> {
 
   private static MasterOrc instance;
 

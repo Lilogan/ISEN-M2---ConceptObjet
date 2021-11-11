@@ -3,6 +3,7 @@ package BeingsClass;
 import java.util.ArrayList;
 
 public abstract class GoodGuys extends Beings {
+
     final private int nbWord = 3;
 
     public void meeting(GoodGuys b){
