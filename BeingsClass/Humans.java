@@ -4,4 +4,11 @@ public class Humans extends GoodGuys{
     public void meeting(MasterHuman h){
         h.addMessages(this.getAllMessage());
     }
+
+    public void meeting(Humans h){
+        this.addMessages(h.getAllMessage());
+        h.addMessages(this.getAllMessage());
+    }
 }
+
+

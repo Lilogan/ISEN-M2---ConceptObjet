@@ -5,4 +5,9 @@ public class Orcs extends BadGuys{
         o.addMessages(this.getAllMessage());
     }
 
+    public void meeting(Orcs o){
+        this.addMessages(o.getAllMessage());
+        o.addMessages(this.getAllMessage());
+    }
+
 }
