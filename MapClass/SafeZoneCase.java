@@ -17,4 +17,11 @@ public class SafeZoneCase extends Case {
 
     }
 
+    public void setRaceName(String str){
+        raceName = str;
+    }
+    public String getRaceName(){
+        return raceName;
+    }
+
 }

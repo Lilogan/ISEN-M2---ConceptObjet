@@ -1,19 +1,29 @@
 package BeingsClass;
 
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
+
+import MapClass.Case;
+import MapClass.Map;
+import Utils.RandomSingleton;
 
 public class Orcs extends BadGuys{
     private static MasterOrc master;
 
-    public Orcs(){
-        if(Orcs.master == null){
-            Orcs.master = new MasterOrc();
-        }
+    public Orcs(Map m){
+        ArrayList<Case> possibleCases = m.getEmtpyCases();
+        Case c = possibleCases.get(RandomSingleton.getInstance().nextInt(possibleCases.size()-1));
+        setCurrentCase(c);
+        c.setFilledWith(this);
     }
 
     public static MasterOrc getMaster(){
         return master;
+    }
+
+    public static void setMaster(MasterOrc m){
+        if(master == null){
+            master = m;
+        }
     }
 
     public void meeting(MasterOrc o){

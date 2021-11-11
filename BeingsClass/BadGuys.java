@@ -1,10 +1,10 @@
 package BeingsClass;
 
 import java.util.ArrayList;
-
 public abstract class BadGuys extends Beings {
 
     final private int nbWord = 3;
+
 
     public void meeting(BadGuys b){
         ArrayList<String> myList = this.getSomeMessage(nbWord);

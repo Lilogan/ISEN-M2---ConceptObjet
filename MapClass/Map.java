@@ -28,13 +28,22 @@ public class Map {
         for(int i = 0; i < n; i++){
             for(int j = 0; j < m; j++){
                 if(i < sizeSafeZone && j < sizeSafeZone){
-                    allCase.add(new SafeZoneCase(i, j, this));
+                    SafeZoneCase c = new SafeZoneCase(i, j, this);
+                    c.setRaceName("Orcs");
+                    allCase.add(c);
                 } else if(i < sizeSafeZone && j >= m-sizeSafeZone){
                     allCase.add(new SafeZoneCase(i, j, this));
+                    SafeZoneCase c = new SafeZoneCase(i, j, this);
+                    c.setRaceName("Humans");
+                    allCase.add(c);
                 } else if(i >= n - sizeSafeZone && j < sizeSafeZone){
-                    allCase.add(new SafeZoneCase(i, j, this));
+                    SafeZoneCase c = new SafeZoneCase(i, j, this);
+                    c.setRaceName("Elfs");
+                    allCase.add(c);
                 } else if(i >= n-sizeSafeZone && j >= m-sizeSafeZone){
-                    allCase.add(new SafeZoneCase(i, j, this));
+                    SafeZoneCase c = new SafeZoneCase(i, j, this);
+                    c.setRaceName("Gobelins");
+                    allCase.add(c);
                 }else{
                     Case c = new Case(i,j, this);
                     if(RandomSingleton.getInstance().nextInt(10) == 1){
@@ -47,17 +56,16 @@ public class Map {
     }
 
     public void display(){
-        Case[][] sortedCases = new Case[n][m];
-        for (Case c: allCase){
-            sortedCases[c.getX()][c.getY()] = c;
+        Case[][] sortedCases = sortCases();
+        for(int i = 0; i < 5; i++){
+            System.out.println("\n");
         }
-
         for (Case[] row: sortedCases){
             for(Case c: row){
                 //print safe zones
+                String color = Main.ANSI_RESET;
                 if(c.checkFilledWith() != null){
                     Beings b = c.checkFilledWith();
-                    String color = Main.ANSI_RESET;
                     if(b instanceof Elfs){
                         color = Main.ANSI_BLUE;
                     } else if (b instanceof Orcs){
@@ -73,7 +81,18 @@ public class Map {
                         System.out.print(color + "+" + Main.ANSI_RESET);
                     }
                 } else if(c instanceof SafeZoneCase){
-                    System.out.print("*");
+                    SafeZoneCase szc = (SafeZoneCase)c;
+                    if(szc.getRaceName() == "Orcs"){
+                        color = Main.ANSI_RED;
+                    }else if(szc.getRaceName() == "Humans"){
+                        color = Main.ANSI_GREEN;
+                    }else if(szc.getRaceName() == "Elfs"){
+                        color = Main.ANSI_BLUE;
+                    }else if(szc.getRaceName() == "Gobelins"){
+                        color = Main.ANSI_YELLOW;
+                    }
+
+                    System.out.print(color + "*" + Main.ANSI_RESET);
                 } else if (c.checkIsObstacle()){
                     System.out.print("x");
                 }else {
@@ -85,10 +104,7 @@ public class Map {
     }
 
     public ArrayList<Case> allCasePossible(int x, int y){
-        Case[][] sortedCases = new Case[n][m];
-        for (Case c: allCase){
-            sortedCases[c.getX()][c.getY()] = c;
-        }
+        Case[][] sortedCases = sortCases();
 
         ArrayList<Case> possibleCases = new ArrayList<>();
 
@@ -124,6 +140,37 @@ public class Map {
 
     public ArrayList<Case> findPathSafeZone(Beings b){
         return new ArrayList<>();
+    }
+
+    public Case[][] sortCases(){
+        Case[][] sortedCases = new Case[n][m];
+        for (Case c: allCase){
+            sortedCases[c.getX()][c.getY()] = c;
+        }
+        return sortedCases;
+    }
+
+    public ArrayList<Case> getEmtpyCases(){
+        ArrayList<Case> emptyCases = new ArrayList<>();
+        for(Case c: allCase){
+            if(!c.checkIsObstacle() && c.checkFilledWith() == null && !(c instanceof SafeZoneCase)){
+                emptyCases.add(c);
+            }
+        }
+        return emptyCases;
+    }
+
+    public ArrayList<Case> getRaceSafeZone(String str){
+        ArrayList<Case> sz = new ArrayList<>();
+        for(Case c: allCase){
+            if(c instanceof SafeZoneCase){
+                SafeZoneCase szc = (SafeZoneCase)c;
+                if(szc.getRaceName() == str){
+                    sz.add(c);
+                }
+            }
+        }
+        return sz;
     }
 
 

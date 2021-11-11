@@ -18,7 +18,8 @@ public class Case {
     }
 
     public void becomeObstacle(Beings b){
-
+        isObstacle = true;
+        filledWith = null;
     }
 
     public Map getMap(){
