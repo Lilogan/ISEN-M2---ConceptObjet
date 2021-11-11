@@ -1,8 +1,7 @@
 package BeingsClass;
 
 public class Elfs extends GoodGuys {
-    public void meeting(Elfs e){
-        this.addMessages(e.getAllMessage());
+    public void meeting(MasterElf e){
         e.addMessages(this.getAllMessage());
     }
 }
