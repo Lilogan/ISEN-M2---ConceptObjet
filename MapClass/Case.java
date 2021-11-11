@@ -44,4 +44,7 @@ public class Case {
     public Beings checkFilledWith(){
         return filledWith;
     }
+    public void setFilledWith(Beings b){
+        filledWith=b;
+    }
 }

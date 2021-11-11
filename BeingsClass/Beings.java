@@ -1,13 +1,13 @@
 package BeingsClass;
 
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import MapClass.Case;
 import MapClass.SafeZoneCase;
 import Utils.RandomSingleton;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * EtreVivant
@@ -84,8 +84,9 @@ public abstract class Beings {
                     for (int i = 0; i < nbrCase; i++) {
                         ArrayList<Case> casesPossible= currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
                         if (casesPossible.size() == 1) {
-                            currentCase.checkFilledWith()=null;
+                            currentCase.setFilledWith(null);
                             currentCase=casesPossible.get(0);
+                            currentCase.setFilledWith(this);
                         }
                         else {
                             Case toRm = null;
@@ -108,7 +109,9 @@ public abstract class Beings {
                             }
                             //add condition to start fight if there is someone on c
                             else {
-                                currentCase = c;
+                                    currentCase.setFilledWith(null);
+                                    currentCase = c;
+                                    currentCase.setFilledWith(this);
                             }
                         }
                     }
