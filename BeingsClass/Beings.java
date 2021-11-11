@@ -19,6 +19,7 @@ public abstract class Beings {
         final private static int maxWord = 4;
         final private static int startingEnergy =10;
         private int energy;
+        private Case startCase;
         private Case currentCase;
         private ArrayList<String> messages;
 
@@ -73,25 +74,46 @@ public abstract class Beings {
                 return currentCase;
         }
 
-        public void move(){
-                Float percentEnergy = (float)(energy/startingEnergy);
-                if (percentEnergy == 0){
-                        currentCase.becomeObstacle();
-                } else if ( percentEnergy >= 0.4 ) {
-                        int nbrCase=RandomSingleton.getInstance().nextInt((int)0.4*startingEnergy);
-                        for (int i=0;i<nbrCase; i++){
-                                ArrayList<Case> cases = currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
-                                Case c = cases.get(RandomSingleton.getInstance().nextInt(cases.size()-1));
-                                if(c.checkIsObstacle()){
-                                        break;
-                                }
-                                //add condition to start fight if there is someone on c
-                                else {
-                                        currentCase = c;
-                                }
+        public void move() {
+                Float percentEnergy = (float) (energy / startingEnergy);
+                startCase = currentCase;
+                if (percentEnergy == 0) {
+                    currentCase.becomeObstacle();
+                } else if (percentEnergy >= 0.4) {
+                    int nbrCase = RandomSingleton.getInstance().nextInt((int) 0.4 * startingEnergy);
+                    for (int i = 0; i < nbrCase; i++) {
+                        ArrayList<Case> casesPossible= currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
+                        if (casesPossible.size() == 1) {
+                            currentCase.checkFilledWith()=null;
+                            currentCase=casesPossible.get(0);
                         }
+                        else {
+                            Case toRm = null;
+                            ArrayList<Case> possibleCases = currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
+                            for (Case c : possibleCases) {
+                                if (c == startCase) {
+                                    toRm = c;
+                                    break;
+                                }
+                            }
+                            if (toRm != null) {
+                                possibleCases.remove(toRm);
+                            }
+                            Case c = possibleCases.get(RandomSingleton.getInstance().nextInt(possibleCases.size() - 1));
+                            if (c.checkIsObstacle()) {
+                                break;
+                            } else if (c.checkFilledWith() != null) {
+                                meeting(c.checkFilledWith());
+                                break;
+                            }
+                            //add condition to start fight if there is someone on c
+                            else {
+                                currentCase = c;
+                            }
+                        }
+                    }
                 }
-        }
+            }
         public void returnToMaster(){
                 Beings master;
                 if(this instanceof Humans){
