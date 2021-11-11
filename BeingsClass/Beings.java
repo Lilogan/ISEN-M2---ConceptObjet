@@ -78,10 +78,7 @@ public abstract class Beings {
                         int nbrCase=RandomSingleton.getInstance().nextInt((int)0.4*startingEnergy);
                         for (int i=0;i<nbrCase; i++){
                                 for (int k=0; k<currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY()).size();k++){
-                                        if(currentCase.getMap().allCasePossible.Case[k]==(startCase.getX(),startCase.getY()) {
-
-                                                //if(currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY())!=(startCase.getX(),startCase.getY()))
-                                                //{
+                                        if(currentCase.getMap().allCasePossible.Case[k]!=(startCase.getX(),startCase.getY()) {
                                                 ArrayList<Case> cases = currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
                                                 Case c = cases.get(RandomSingleton.getInstance().nextInt(cases.size() - 1));
                                                 if (c.checkIsObstacle()) {
