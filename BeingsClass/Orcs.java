@@ -1,5 +1,8 @@
 package BeingsClass;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class Orcs extends BadGuys{
     public void meeting(MasterOrc o){
         o.addMessages(this.getAllMessage());
