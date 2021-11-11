@@ -19,6 +19,7 @@ public abstract class Beings {
         final private static int startingEnergy =10;
         private int energy;
         private Case currentCase;
+        private Case startCase;
         private ArrayList<String> messages;
 
         public ArrayList<String> getAllMessage() {
@@ -70,20 +71,29 @@ public abstract class Beings {
 
         public void move(){
                 Float percentEnergy = (float)(energy/startingEnergy);
+                startCase=currentCase;
                 if (percentEnergy == 0){
                         currentCase.becomeObstacle();
                 } else if ( percentEnergy >= 0.4 ) {
                         int nbrCase=RandomSingleton.getInstance().nextInt((int)0.4*startingEnergy);
                         for (int i=0;i<nbrCase; i++){
-                                ArrayList<Case> cases = currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
-                                Case c = cases.get(RandomSingleton.getInstance().nextInt(cases.size()-1));
-                                if(c.checkIsObstacle()){
-                                        break;
+                                for (int k=0; k<currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY()).size();k++){
+                                        if(currentCase.getMap().allCasePossible.Case[k]==(startCase.getX(),startCase.getY()) {
+
+                                                //if(currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY())!=(startCase.getX(),startCase.getY()))
+                                                //{
+                                                ArrayList<Case> cases = currentCase.getMap().allCasePossible(currentCase.getX(), currentCase.getY());
+                                                Case c = cases.get(RandomSingleton.getInstance().nextInt(cases.size() - 1));
+                                                if (c.checkIsObstacle()) {
+                                                        break;
+                                                }
+                                                //add condition to start fight if there is someone on c
+                                                else {
+                                                        currentCase = c;
+                                                }
+                                        }
                                 }
-                                //add condition to start fight if there is someone on c
-                                else {
-                                        currentCase = c;
-                                }
+                                //}
                         }
                 }
         }
