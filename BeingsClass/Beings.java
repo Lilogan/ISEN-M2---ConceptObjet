@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 
 import MapClass.Case;
+import MapClass.SafeZoneCase;
 import Utils.RandomSingleton;
 
 /**
@@ -68,6 +69,10 @@ public abstract class Beings {
                 return RandomSingleton.getInstance().nextBoolean();
         }
 
+        private Case getCurrentCase(){
+                return currentCase;
+        }
+
         public void move(){
                 Float percentEnergy = (float)(energy/startingEnergy);
                 if (percentEnergy == 0){
@@ -88,53 +93,30 @@ public abstract class Beings {
                 }
         }
         public void returnToMaster(){
-                case posMaster= new(case); //faut voir comment avoir la case ou se trouve master
-                while (((currentCase.getX+1==posMaster.getX)&&(currentCase.getY==posMaster.getY))||((currentCase.getX-1==posMaster.getX)&&(currentCase.getY==posMaster.getY))||((currentCase.getX==posMaster.getX)&&(currentCase.getY+1==posMaster.getY))||((currentCase.getX==posMaster.getX)&&(currentCase.getY-1==posMaster.getY))){
-                          if (currentCase.getX<posMaster.getX){
-                                  if(c.checkIsObstacle()){
-                                        break;
-                                }
-                                //add condition to start fight if there is someone on c
-                                else {
-                                        // comment on remplace?
-                                        currentCase = ;
-                                }
-
-                          }
-                          if (currentCase.getX>posMaster.getX){
-                                  if(c.checkIsObstacle()){
-                                        break;
-                                }
-                                //add condition to start fight if there is someone on c
-                                else {
-                                        // comment on remplace?
-                                        currentCase = ;
-                                }
-
-                          }
-                          if (currentCase.getY<posMaster.getY){
-                                  if(c.checkIsObstacle()){
-                                        break;
-                                }
-                                //add condition to start fight if there is someone on c
-                                else {
-                                        // comment on remplace?
-                                        currentCase = ;
-                                }
-
-                          }
-                          if (currentCase.getY>posMaster.getY){
-                                  if(c.checkIsObstacle()){
-                                        break;
-                                }
-                                //add condition to start fight if there is someone on c
-                                else {
-                                        // comment on remplace?
-                                        currentCase = ;
-                                }
-
-                          }
+                Beings master;
+                if(this instanceof Humans){
+                        master = Humans.getMaster();
+                }else if(this instanceof Elfs){
+                        master = Elfs.getMaster();
+                }else if(this instanceof Orcs){
+                        master = Orcs.getMaster();
+                }else if(this instanceof Gobelins){
+                        master = Gobelins.getMaster();
+                }else{
+                        return;
                 }
+                int distance = (master.getCurrentCase().getX() - this.currentCase.getX())^2 + (master.getCurrentCase().getY() - this.currentCase.getY())^2;
+                if(energy > distance+2){
+                        ArrayList<Case> possibleCases = currentCase.getMap().allCasePossible(master.getCurrentCase().getX(), master.getCurrentCase().getY());
+                        for(Case c: possibleCases){
+                                if(c instanceof SafeZoneCase){
+                                        currentCase = c;
+                                        break;
+                                }
+                        }
+                }
+
+
         }
 
 }

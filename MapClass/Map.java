@@ -47,10 +47,7 @@ public class Map {
     }
 
     public void display(){
-        Case[][] sortedCases = new Case[n][m];
-        for (Case c: allCase){
-            sortedCases[c.getX()][c.getY()] = c;
-        }
+        Case[][] sortedCases = sortMap();
 
         for (Case[] row: sortedCases){
             for(Case c: row){
@@ -85,10 +82,7 @@ public class Map {
     }
 
     public ArrayList<Case> allCasePossible(int x, int y){
-        Case[][] sortedCases = new Case[n][m];
-        for (Case c: allCase){
-            sortedCases[c.getX()][c.getY()] = c;
-        }
+        Case[][] sortedCases = sortMap();
 
         ArrayList<Case> possibleCases = new ArrayList<>();
 
@@ -124,6 +118,14 @@ public class Map {
 
     public ArrayList<Case> findPathSafeZone(Beings b){
         return new ArrayList<>();
+    }
+
+    public Case[][] sortMap(){
+        Case[][] sortedCases = new Case[n][m];
+        for (Case c: allCase){
+            sortedCases[c.getX()][c.getY()] = c;
+        }
+        return sortedCases;
     }
 
 
