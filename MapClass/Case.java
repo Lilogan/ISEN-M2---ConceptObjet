@@ -6,6 +6,7 @@ public class Case {
     private int x;
     private int y;
     private Boolean isObstacle;
+    private Boolean isSomeone;
     private Beings filledWith;
     private Map map;
 
@@ -43,5 +44,8 @@ public class Case {
     }
     public Beings checkFilledWith(){
         return filledWith;
+    }
+    public boolean checkIsSomeone(){
+        return isSomeone;
     }
 }

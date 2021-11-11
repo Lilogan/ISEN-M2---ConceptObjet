@@ -84,6 +84,10 @@ public abstract class Beings {
                                                 if (c.checkIsObstacle()) {
                                                         break;
                                                 }
+                                                else if(c.checkIsSomeone()){
+                                                        meeting();
+                                                        break;
+                                                }
                                                 //add condition to start fight if there is someone on c
                                                 else {
                                                         currentCase = c;
